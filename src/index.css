@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    body{
+        font-family: 'lato',sans-serif;
+    }
+}
+@layer utilities{
+    .hide-scrollbar::-webkit-scrollbar{
+        display:none;
+    }
+}
