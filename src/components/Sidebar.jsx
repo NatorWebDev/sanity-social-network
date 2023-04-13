@@ -4,6 +4,7 @@ import { IoIosArrowForward } from "react-icons/io";
 
 import logo from "../assets/logo.png";
 
+
 export default function Sidebar({ user, closeToggle }) {
   const categories = [
     { name: "Animals" },
