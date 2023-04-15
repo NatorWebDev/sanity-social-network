@@ -9,7 +9,7 @@ import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
 import { fetchUser } from "../utils/fetchUser";
 
 export default function Pin({
-  pin: { postedBy, image, _id, destination, save },
+  pin:{ postedBy, image, _id, destination, save },
 }) {
   const [postHovered, setPostHovered] = useState(false);
   const [savingPost, setSavingPost] = useState(false);
@@ -42,6 +42,10 @@ export default function Pin({
         });
     }
   };
+
+  const deletePin = (id) =>{
+    client.delete(id).then(()=>{window.location.reload()})
+  }
 
   return (
     <div className="m-2">
@@ -95,10 +99,38 @@ export default function Pin({
                 </button>
               )}
             </div>
-            uwu
+            <div className="flex justify-between items-center gap-2 w-full">
+              {destination && (
+                <a 
+                href={destination}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md"
+                >
+                  <BsFillArrowUpRightCircleFill />
+                  {destination.slice(8,20)}
+                </a>
+              )}
+              {postedBy?._id == user.sub && (
+                <button
+                  type='button'
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deletePin(_id);                    
+                  }}
+                  className="bg-red-500 opacity-70 hover:opacity-100 text-black font-bold p-3 text-base rounded-full hover:shadow-md outline-none bg-white"
+                  >
+                    <AiTwotoneDelete />
+                </button>
+              )}
+            </div>
           </div>
         )}
       </div>
+      <Link to={`user-profile/${postedBy?._id}`} className="flex gap-2 mt-2 items-center">
+        <img src={postedBy?.image} alt="user-profile" className="w-8 h-8 rounded-full object-cover"/>
+        <p className="font-semibold capitalize">{postedBy?.userName}</p>       
+      </Link>
     </div>
   );
 }
