@@ -13,7 +13,7 @@ export default function MasonryLayout({pins}) {
   }
 
   return (
-    <Masonry clasName='flex animate-sidebar_open' breakpointCols={breakPointObj}>
+    <Masonry className='flex animate-sidebar_open' breakpointCols={breakPointObj}>
       {pins?.map((pin)=>(<Pin key={pin._id} pin={pin} className='w-max'/>))}
     </Masonry>
   )

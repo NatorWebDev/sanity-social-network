@@ -6,11 +6,42 @@ import { v4 as uuidv4 } from "uuid";
 import { MdDownloadForOffline } from "react-icons/md";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
+import { fetchUser } from "../utils/fetchUser";
 
-export default function Pin({ pin: { postedBy, image, _id, destination } }) {
+export default function Pin({
+  pin: { postedBy, image, _id, destination, save },
+}) {
   const [postHovered, setPostHovered] = useState(false);
   const [savingPost, setSavingPost] = useState(false);
   const navigate = useNavigate();
+  const user = fetchUser();
+  
+  const alreadySaved = !!(save?.filter((item) => item.postedBy._id === user.sub))?.length;
+  //el '!!' es una manera de convertir el valor length(que va a ser 1 o 0) en un boolean porque !1 = false y !!1 = true
+
+  const savePin = (id) => {
+    if (!alreadySaved) {
+      setSavingPost(true);
+      client
+        .patch(id)
+        .setIfMissing({ save: [] })
+        .insert("after", "save[-1]", [
+          {
+            _key: uuidv4(),
+            userId: user.sub,
+            postedBy: {
+              _type: "postedBy",
+              _ref: user.sub,
+            },
+          },
+        ])
+        .commit()
+        .then(() => {
+          window.location.reload();
+          setSavingPost(false)
+        });
+    }
+  };
 
   return (
     <div className="m-2">
@@ -39,10 +70,30 @@ export default function Pin({ pin: { postedBy, image, _id, destination } }) {
                     e.stopPropagation();
                   }}
                 >
-                    <MdDownloadForOffline className="bg-white w-9 h-9 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none"/>
+                  <MdDownloadForOffline className="bg-white w-9 h-9 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none" />
                 </a>
               </div>
-              awa
+              {alreadySaved ? (
+                <button
+                  type="button"
+                  className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none"
+                >
+                  {save?.length} Saved
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if(!savingPost){
+                    savePin(_id);
+                    }
+                  }}
+                >
+                   {savingPost ? 'Saving' : 'Save'}
+                </button>
+              )}
             </div>
             uwu
           </div>
