@@ -190,10 +190,11 @@ export default function CreatePin({ user }) {
                   Select Category
                 </option>
 
-                {categories.map((category) => (
+                {categories.map((category,index) => (
                   <option
                     className="text-base border-0 outline-none capitalize bg-white text-black"
                     value={category.name}
+                    key={index}
                   >
                     {category.name}
                   </option>
