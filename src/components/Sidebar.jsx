@@ -3,17 +3,10 @@ import { RiHomeFill } from "react-icons/ri";
 import { IoIosArrowForward } from "react-icons/io";
 
 import logo from "../assets/logo.png";
+import { categories } from "../utils/data";
 
 
 export default function Sidebar({ user, closeToggle }) {
-  const categories = [
-    { name: "Animals" },
-    { name: "Wallpapers" },
-    { name: "Photography" },
-    { name: "Gaming" },
-    { name: "Coding" },
-    { name: "other" },
-  ];
 
   const isNotActiveStyle =
     "flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize ";
