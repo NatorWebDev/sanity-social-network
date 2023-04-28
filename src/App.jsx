@@ -6,8 +6,8 @@ import Home from './container/Home'
 function App() {
   return (
       <Routes>
-        <Route path='/sanity-social-network/login' element={<Login />}/>
-        <Route path='/sanity-social-network/*' element={<Home />}/>
+        <Route path='/login' element={<Login />}/>
+        <Route path='/*' element={<Home />}/>
       </Routes>
   )
 
