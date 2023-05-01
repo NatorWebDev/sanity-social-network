@@ -2,7 +2,7 @@ import { NavLink, Link } from "react-router-dom";
 import { RiHomeFill } from "react-icons/ri";
 import { IoIosArrowForward } from "react-icons/io";
 
-import logo from "../assets/logo.png";
+import logo from "../assets/photoGalleryLogo.jpg";
 import { categories } from "../utils/data";
 
 
@@ -26,7 +26,10 @@ export default function Sidebar({ user, closeToggle }) {
           className="flex px-5 gap-2 my-6 pt-1 w-[190px]"
           onClick={handleCloseSidebar}
         >
-          <img src={logo} alt="logo" className="w-full" />
+          <div className="p-5 flex justify-center items-center w-full">
+            <img src={logo} className="w-[50px]"/>
+            <h2 className="text-[30px] text-black">PHOTOG</h2>
+          </div>
         </Link>
       </div>
       <div className="flex flex-col gap-5 flex-1">

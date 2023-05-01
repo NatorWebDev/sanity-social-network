@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import shareVideo from "../assets/share.mp4";
-import logo from "../assets/logowhite.png";
+import logo from "../assets/photoGalleryLogo.jpg";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import {client} from '../client'
@@ -42,8 +42,9 @@ export default function Login() {
         />
 
         <div className="absolute flex flex-col justify-center items-center top-0 left-0 bg-[#00000070] w-full h-full">
-          <div className="p-5">
-            <img src={logo} />
+          <div className="p-5 flex justify-center items-center">
+            <img src={logo} className="w-[50px]"/>
+            <h2 className="text-[30px] text-white">PHOTOG</h2>
           </div>
           <div className="shadow-2xl">
             <GoogleLogin
