@@ -6,7 +6,7 @@ import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { UserProfile, Sidebar } from "../components";
 import Pins from "./Pins";
 import { client } from "../client";
-import logo from "../assets/logo.png";
+import logo from "../assets/photoGalleryLogo.jpg";
 import { userQuery } from "../utils/data";
 import { fetchUser } from "../utils/fetchUser";
 
@@ -15,10 +15,10 @@ export default function Home() {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const scrollRef = useRef(null);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const userInfo = fetchUser();
- 
+
   useEffect(() => {
     const query = userQuery(userInfo?.sub);
     client.fetch(query).then((data) => {
@@ -28,7 +28,9 @@ export default function Home() {
 
   useEffect(() => {
     scrollRef.current.scrollTo(0, 0);
-    if(!userInfo){navigate('/login')}
+    if (!userInfo) {
+      navigate("/login");
+    }
   }, []);
 
   return (
@@ -46,7 +48,10 @@ export default function Home() {
             }}
           />
           <Link to="/">
-            <img src={logo} alt="logo" className="w-28" />
+            <div className="flex justify-center items-center w-full">
+              <img src={logo} className="w-[50px]" />
+              <h2 className="text-[30px] text-black">PHOTOG</h2>
+            </div>
           </Link>
           <Link to={`user-profile/${user?._id}`}>
             <img

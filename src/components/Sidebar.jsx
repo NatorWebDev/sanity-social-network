@@ -26,7 +26,7 @@ export default function Sidebar({ user, closeToggle }) {
           className="flex px-5 gap-2 my-6 pt-1 w-[190px]"
           onClick={handleCloseSidebar}
         >
-          <div className="p-5 flex justify-center items-center w-full">
+          <div className="flex justify-center items-center w-full">
             <img src={logo} className="w-[50px]"/>
             <h2 className="text-[30px] text-black">PHOTOG</h2>
           </div>
